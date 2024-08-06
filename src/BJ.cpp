@@ -68,24 +68,77 @@ int main(void) {
 				if ((deck.calc_val_card_dealer() < deck.calc_val_card_player() && deck.calc_val_card_player() <= 21) || deck.calc_val_card_dealer() > 21) {
 					deck.refresh_card();
 					usleep(1000000);
-					deck.print_win_screen();
-					getch();
-					deck.reset_game();
+					while (true) {
+						deck.print_win_screen();
+						ch = getch();
+						if (ch == KEY_LEFT && deck.loose_win_menu > 1) {
+							deck.loose_win_menu--;
+						}
+						if (ch == KEY_RIGHT && deck.loose_win_menu <= 2) {
+							deck.loose_win_menu++;
+						}
+						//deck.reset_game();
+						if (ch == ' ' || ch == '\n') {
+							if (deck.loose_win_menu == 1) {
+								deck.reset_game();
+								break ;
+							}
+							if (deck.loose_win_menu == 2) {
+								game = false;
+								break ;
+							}
+						}
+					}
 				}
 				else if (deck.calc_val_card_dealer() == deck.calc_val_card_player()) {
 					deck.refresh_card();
 					usleep(1000000);
-					deck.print_even_screen();
-					getch();
-					deck.reset_game();
+					while (true) {
+						deck.print_even_screen();
+						ch = getch();
+						if (ch == KEY_LEFT && deck.loose_win_menu > 1) {
+							deck.loose_win_menu--;
+						}
+						if (ch == KEY_RIGHT && deck.loose_win_menu <= 2) {
+							deck.loose_win_menu++;
+						}
+						//deck.reset_game();
+						if (ch == ' ' || ch == '\n') {
+							if (deck.loose_win_menu == 1) {
+								deck.reset_game();
+								break ;
+							}
+							if (deck.loose_win_menu == 2) {
+								game = false;
+								break ;
+							}
+						}
+					}
 				}
 				else {
 					deck.refresh_card();
 					usleep(1000000);
-					deck.print_loose_screen();
-					getch();
-					//usleep(1000000);
-					deck.reset_game();
+					while (true) {
+						deck.print_loose_screen();
+						ch = getch();
+						if (ch == KEY_LEFT && deck.loose_win_menu > 1) {
+							deck.loose_win_menu--;
+						}
+						if (ch == KEY_RIGHT && deck.loose_win_menu <= 2) {
+							deck.loose_win_menu++;
+						}
+						//deck.reset_game();
+						if (ch == ' ' || ch == '\n') {
+							if (deck.loose_win_menu == 1) {
+								deck.reset_game();
+								break ;
+							}
+							if (deck.loose_win_menu == 2) {
+								game = false;
+								break ;
+							}
+						}
+					}
 				}
 			}
 		}
@@ -95,10 +148,27 @@ int main(void) {
 		if (deck.calc_val_card_player() > 21) {
 			deck.refresh_card();
 			usleep(1000000);
-			deck.print_loose_screen();
-			getch();
-			//usleep(1000000);
-			deck.reset_game();
+			while (true) {
+				deck.print_loose_screen();
+				ch = getch();
+				if (ch == KEY_LEFT && deck.loose_win_menu > 1) {
+					deck.loose_win_menu--;
+				}
+				if (ch == KEY_RIGHT && deck.loose_win_menu <= 2) {
+					deck.loose_win_menu++;
+				}
+				//deck.reset_game();
+				if (ch == ' ' || ch == '\n') {
+					if (deck.loose_win_menu == 1) {
+						deck.reset_game();
+						break ;
+					}
+					if (deck.loose_win_menu == 2) {
+						game = false;
+						break ;
+					}
+				}
+			}
 		}
 
 	}

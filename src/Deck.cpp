@@ -12,7 +12,7 @@ Deck::Deck() {
 	NB_CARDS = 52;
 	NB_DECKS = 6;
 	actual_menu = 1;
-	loose_win_menu = 0;
+	loose_win_menu = 1;
 }
 
 Deck::~Deck() {
@@ -199,7 +199,22 @@ void Deck::print_loose_screen() {
 	attron(COLOR_PAIR(3));
 	mvprintw(y / 2, x / 2 - 5, "YOU LOOSE");
 	attroff(COLOR_PAIR(3));
-	
+	if (loose_win_menu == 1) {
+		attron(COLOR_PAIR(2));
+		mvprintw(y / 2 + 5, x / 2 - 10, "RETRY");
+		attroff(COLOR_PAIR(2));
+		mvprintw(y / 2 + 5, x / 2 + 5, "EXIT");
+	}
+	else if (loose_win_menu == 2) {
+		mvprintw(y / 2 + 5, x / 2 - 10, "RETRY");
+		attron(COLOR_PAIR(2));
+		mvprintw(y / 2 + 5, x / 2 + 5, "EXIT");
+		attroff(COLOR_PAIR(2));
+	}
+	else {
+		mvprintw(y / 2 + 5, x / 2 - 10, "RETRY");
+		mvprintw(y / 2 + 5, x / 2 + 5, "EXIT");
+	}
 }
 
 void Deck::print_win_screen() {
@@ -210,6 +225,22 @@ void Deck::print_win_screen() {
 	attron(COLOR_PAIR(4));
 	mvprintw(y / 2, x / 2 - 5, "YOU WIN");
 	attroff(COLOR_PAIR(4));
+	if (loose_win_menu == 1) {
+		attron(COLOR_PAIR(2));
+		mvprintw(y / 2 + 5, x / 2 - 10, "RETRY");
+		attroff(COLOR_PAIR(2));
+		mvprintw(y / 2 + 5, x / 2 + 5, "EXIT");
+	}
+	else if (loose_win_menu == 2) {
+		mvprintw(y / 2 + 5, x / 2 - 10, "RETRY");
+		attron(COLOR_PAIR(2));
+		mvprintw(y / 2 + 5, x / 2 + 5, "EXIT");
+		attroff(COLOR_PAIR(2));
+	}
+	else {
+		mvprintw(y / 2 + 5, x / 2 - 10, "RETRY");
+		mvprintw(y / 2 + 5, x / 2 + 5, "EXIT");
+	}
 }
 
 void Deck::print_even_screen() {
@@ -217,9 +248,25 @@ void Deck::print_even_screen() {
 	getmaxyx(stdscr, y, x);
 	clear();
 	printCorner();
-	attron(COLOR_PAIR(2));
+	attron(COLOR_PAIR(1));
 	mvprintw(y / 2, x / 2 - 5, "EVEN");
-	attroff(COLOR_PAIR(2));
+	attroff(COLOR_PAIR(1));
+	if (loose_win_menu == 1) {
+		attron(COLOR_PAIR(2));
+		mvprintw(y / 2 + 5, x / 2 - 10, "RETRY");
+		attroff(COLOR_PAIR(2));
+		mvprintw(y / 2 + 5, x / 2 + 5, "EXIT");
+	}
+	else if (loose_win_menu == 2) {
+		mvprintw(y / 2 + 5, x / 2 - 10, "RETRY");
+		attron(COLOR_PAIR(2));
+		mvprintw(y / 2 + 5, x / 2 + 5, "EXIT");
+		attroff(COLOR_PAIR(2));
+	}
+	else {
+		mvprintw(y / 2 + 5, x / 2 - 10, "RETRY");
+		mvprintw(y / 2 + 5, x / 2 + 5, "EXIT");
+	}
 }
 
 void	Deck::init_game(void) {
@@ -237,6 +284,6 @@ void	Deck::reset_game(void) {
 	player_hand.clear();
 	dealer_hand.clear();
 	actual_menu = 1;
-	loose_win_menu = 0;
+	loose_win_menu = 1;
 	init_game();
 }
