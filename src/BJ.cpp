@@ -31,9 +31,11 @@ int main(void) {
 	noecho();
 	keypad(stdscr, TRUE);
 	srand(time(NULL));
-	start_color();          // Start color functionality
-	init_pair(1, COLOR_GREEN, COLOR_BLACK); // Define color pair 1 as green on black
-	init_pair(2, COLOR_RED, COLOR_BLACK);
+	start_color();
+	init_pair(1, COLOR_WHITE, COLOR_BLACK);
+	init_pair(2, COLOR_BLACK, COLOR_WHITE);
+	init_pair(3, COLOR_RED, COLOR_BLACK);
+	init_pair(4, COLOR_GREEN, COLOR_BLACK);
 	//int i = rand() % 52;
 	bool game = true;
 	deck.init_game();
@@ -41,26 +43,62 @@ int main(void) {
 		clear();
 		printCorner();
 		deck.refresh_card();
-
-		//refresh_game();
 		int ch = getch();
 		if (ch == 'q') {
 			game = false;
 			break ;
-		}// space for it
-		if (ch == ' ') {
-			//printw("okaye");
-			deck.add_playerCard();
-
-			//deck.push_back(i);
-			//add_card(i, dealer_hand);
-
-
-			//printCards(i, deck.size(), rand() % 30, rand() % 30);
-			//i = rand() % 52;
+		}
+		if (ch == KEY_LEFT && deck.actual_menu > 1) {
+			deck.actual_menu--;
+		}
+		if (ch == KEY_RIGHT && deck.actual_menu < 2) {
+			deck.actual_menu++;
+		}
+		if (ch == ' ' || ch == '\n') {
+			if (deck.actual_menu == 1) {
+				deck.add_playerCard();
+				deck.refresh_card();
+			}
+			if (deck.actual_menu == 2) {
+				while (deck.calc_val_card_dealer() < 17) {
+					deck.add_dealerCard();
+					deck.refresh_card();
+					usleep(355555);
+				}
+				if ((deck.calc_val_card_dealer() < deck.calc_val_card_player() && deck.calc_val_card_player() <= 21) || deck.calc_val_card_dealer() > 21) {
+					deck.refresh_card();
+					usleep(1000000);
+					deck.print_win_screen();
+					getch();
+					deck.reset_game();
+				}
+				else if (deck.calc_val_card_dealer() == deck.calc_val_card_player()) {
+					deck.refresh_card();
+					usleep(1000000);
+					deck.print_even_screen();
+					getch();
+					deck.reset_game();
+				}
+				else {
+					deck.refresh_card();
+					usleep(1000000);
+					deck.print_loose_screen();
+					getch();
+					//usleep(1000000);
+					deck.reset_game();
+				}
+			}
 		}
 		if (ch == 'r') {
-			//deck.clear();
+			deck.add_dealerCard();
+		}
+		if (deck.calc_val_card_player() > 21) {
+			deck.refresh_card();
+			usleep(1000000);
+			deck.print_loose_screen();
+			getch();
+			//usleep(1000000);
+			deck.reset_game();
 		}
 
 	}

@@ -7,6 +7,7 @@
 #include <ctime>
 #include <ncursesw/ncurses.h>
 #include <locale.h>
+#include <unistd.h>
 
 class Deck {
 	public:
@@ -19,6 +20,15 @@ class Deck {
 		void	add_dealerCard(void);
 		void	refresh_card(void);
 		void	init_game(void);
+		int		calc_val_card_dealer();
+		int		calc_val_card_player();
+		void	print_loose_screen();
+		void	print_win_screen();
+		void	print_even_screen();
+		void	reset_game();
+
+		int		actual_menu;
+		int 	loose_win_menu;
 	private:
 		int nb_decks;
 		int player_cards_x;
