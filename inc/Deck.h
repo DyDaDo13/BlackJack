@@ -29,6 +29,7 @@ class Deck {
 
 		int		actual_menu;
 		int 	loose_win_menu;
+		int		option_menu;
 	private:
 		int nb_decks;
 		int player_cards_x;
@@ -37,6 +38,8 @@ class Deck {
 		int dealer_cards_y;
 		int	NB_CARDS;
 		int NB_DECKS;
+		int money;
+		int bet;
 		std::vector<int> player_hand;
 		std::vector<int> dealer_hand;
 };

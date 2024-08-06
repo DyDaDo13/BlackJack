@@ -1,5 +1,9 @@
 #include "../inc/Deck.h"
 
+void printCoins(int coin, int x, int y) {
+	mvprintw(y, x, "(%d)", coin);
+}
+
 void printCards(int card, int x, int y) {
 	if (card == 0) {
 		mvprintw(y + 0, x, "╭───╮");

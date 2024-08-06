@@ -1,5 +1,6 @@
 #include "../inc/Deck.h"
 
+void printCoins(int coin, int x, int y);
 void printCorner(void);
 
 void printCards(int card, int x, int y);
@@ -13,6 +14,9 @@ Deck::Deck() {
 	NB_DECKS = 6;
 	actual_menu = 1;
 	loose_win_menu = 1;
+	option_menu = 1;
+	money = 100;
+	bet = 0;
 }
 
 Deck::~Deck() {
@@ -197,7 +201,7 @@ void Deck::print_loose_screen() {
 	clear();
 	printCorner();
 	attron(COLOR_PAIR(3));
-	mvprintw(y / 2, x / 2 - 5, "YOU LOOSE");
+	mvprintw(y / 2, x / 2 - 4, "YOU LOOSE");
 	attroff(COLOR_PAIR(3));
 	if (loose_win_menu == 1) {
 		attron(COLOR_PAIR(2));
@@ -223,7 +227,7 @@ void Deck::print_win_screen() {
 	clear();
 	printCorner();
 	attron(COLOR_PAIR(4));
-	mvprintw(y / 2, x / 2 - 5, "YOU WIN");
+	mvprintw(y / 2, x / 2 - 3, "YOU WIN");
 	attroff(COLOR_PAIR(4));
 	if (loose_win_menu == 1) {
 		attron(COLOR_PAIR(2));
@@ -249,7 +253,7 @@ void Deck::print_even_screen() {
 	clear();
 	printCorner();
 	attron(COLOR_PAIR(1));
-	mvprintw(y / 2, x / 2 - 5, "EVEN");
+	mvprintw(y / 2, x / 2 - 2, "EVEN");
 	attroff(COLOR_PAIR(1));
 	if (loose_win_menu == 1) {
 		attron(COLOR_PAIR(2));
@@ -268,6 +272,22 @@ void Deck::print_even_screen() {
 		mvprintw(y / 2 + 5, x / 2 + 5, "EXIT");
 	}
 }
+
+// void	Deck::print_option_menu() {
+// 	clear();
+// 	int x, y;
+// 	getmaxyx(stdscr, y, x);
+// 	printCorner();
+// 	mvprintw(y / 2 - 4, x, "╭─────────────╮");
+// 	mvprintw(y / 2 - 3, x, "│             │");
+// 	mvprintw(y / 2 - 2, x, "│             │");
+// 	mvprintw(y / 2 - 1, x, "│             │");
+// 	mvprintw(y / 2 + 0, x, "│             │");
+// 	mvprintw(y / 2 + 1, x, "│             │");
+// 	mvprintw(y / 2 + 2, x, "│             │");
+// 	mvprintw(y / 2 + 3, x, "│             │");
+// 	mvprintw(y / 2 + 4, x, "╰─────────────╯");
+// }
 
 void	Deck::init_game(void) {
 	clear();
